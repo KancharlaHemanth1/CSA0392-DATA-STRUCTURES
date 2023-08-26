@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+// Function to find the missing element in an unsorted array
+int findMissingElement(int arr[], int size) {
+    int totalSum = 0;
+    int actualSum = 0;
+
+    // Calculate the sum of numbers from 1 to n
+    for (int i = 1; i <= size + 1; i++) {
+        totalSum += i;
+    }
+
+    // Calculate the sum of elements in the array
+    for (int i = 0; i < size; i++) {
+        actualSum += arr[i];
+    }
+
+    // The difference between the total sum and the actual sum is the missing element
+    return totalSum - actualSum;
+}
+
+int main() {
+    int arr[] = {2, 5, 1, 4, 6}; // Example array
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    int missingElement = findMissingElement(arr, size);
+    printf("The missing element is: %d\n", missingElement);
+
+    return 0;
+}
