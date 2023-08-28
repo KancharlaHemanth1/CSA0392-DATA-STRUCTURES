@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure for a binary tree node
+struct TreeNode {
+    int data;
+    struct TreeNode* left;
+    struct TreeNode* right;
+};
+
+// Function to create a new node
+struct TreeNode* createNode(int data) {
+    struct TreeNode* newNode = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+    newNode->data = data;
+    newNode->left = newNode->right = NULL;
+    return newNode;
+}
+
+// Function to insert a new node into a left-skewed binary tree
+struct TreeNode* insertLeftSkewed(struct TreeNode* root, int data) {
+    if (root == NULL) {
+        return createNode(data);
+    }
+    root->left = insertLeftSkewed(root->left, data);
+    return root;
+}
+
+// Function to perform an in-order traversal of a left-skewed binary tree
+void inOrderTraversal(struct TreeNode* root) {
+    if (root != NULL) {
+        inOrderTraversal(root->left);
+        printf("%d ", root->data);
+        inOrderTraversal(root->right);
+    }
+}
+
+int main() {
+    // Create a left-skewed binary tree
+    struct TreeNode* root = NULL;
+    root = insertLeftSkewed(root, 1);
+    insertLeftSkewed(root, 2);
+    insertLeftSkewed(root, 3);
+    insertLeftSkewed(root, 4);
+    insertLeftSkewed(root, 5);
+
+    printf("In-order traversal of the left-skewed binary tree: ");
+    inOrderTraversal(root);
+    printf("\n");
+
+    return 0;
+}
